@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:dev": "NODE_PATH=./src nodemon ./src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "debuger": "node --inspect-brk ./src/index.js",
+    "precommit": "lint-staged",
+    "lint": "npm-run-all lint:*",
+    "lint:js": "eslint ./src/** --ext .js --color -f stylish --fix"
   },
   "repository": {
     "type": "git",
@@ -15,10 +20,20 @@
   "bugs": {
     "url": "https://github.com/NeoWorkPage/node-tutorial/issues"
   },
+  "lint-staged": {
+    "*.js": [
+      "eslint --color -f stylish --fix",
+      "git add"
+    ]
+  },
   "homepage": "https://github.com/NeoWorkPage/node-tutorial#readme",
   "devDependencies": {
     "eslint": "^5.4.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0"
+    "eslint-plugin-import": "^2.14.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.2.2",
+    "nodemon": "^1.18.3",
+    "npm-run-all": "^4.1.3"
   }
 }
